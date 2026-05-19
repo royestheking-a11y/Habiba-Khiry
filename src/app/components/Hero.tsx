@@ -201,7 +201,7 @@ export function Hero() {
             {/* Image container */}
             <div className="relative">
               <div
-                className="w-72 h-72 md:w-96 md:h-96 rounded-2xl overflow-hidden"
+                className="w-80 h-80 sm:w-96 sm:h-96 md:w-[420px] md:h-[420px] lg:w-[460px] lg:h-[460px] rounded-2xl overflow-hidden"
                 style={{
                   border: "1px solid rgba(79, 209, 255, 0.15)",
                   boxShadow:
@@ -235,10 +235,10 @@ export function Hero() {
             {/* Floating Stat Cards */}
             {floatingStats.map((stat, i) => {
               const positions = [
-                { top: "-1rem", left: "-4rem" },
-                { top: "-1rem", right: "-4rem" },
-                { bottom: "4rem", left: "-5rem" },
-                { bottom: "1rem", right: "-4rem" },
+                { top: "-1rem", left: "-6rem" },
+                { top: "-1rem", right: "-6rem" },
+                { bottom: "4rem", left: "-7rem" },
+                { bottom: "1rem", right: "-6rem" },
               ];
               const pos = positions[i];
 
