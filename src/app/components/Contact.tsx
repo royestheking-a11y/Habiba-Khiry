@@ -15,7 +15,7 @@ export function Contact() {
     setForm({ name: "", email: "", company: "", message: "" });
   };
 
-  const inputStyle = {
+  const inputStyle: React.CSSProperties = {
     width: "100%",
     background: "rgba(15, 23, 42, 0.6)",
     border: "1px solid rgba(79, 209, 255, 0.1)",
@@ -26,7 +26,7 @@ export function Contact() {
     color: "#F8FAFC",
     outline: "none",
     transition: "border-color 0.2s",
-    textAlign: isRtl ? "right" : "left" as const,
+    textAlign: isRtl ? "right" : "left",
   };
 
   return (
