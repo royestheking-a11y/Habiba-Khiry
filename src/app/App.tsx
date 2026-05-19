@@ -10,8 +10,11 @@ import { SkillsPage } from "./pages/SkillsPage";
 import { AchievementsPage } from "./pages/AchievementsPage";
 import { ContactPage } from "./pages/ContactPage";
 
-export default function App() {
+import { LanguageProvider, useLanguage } from "./context/LanguageContext";
+
+function MainContent() {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const { isRtl } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,36 +27,46 @@ export default function App() {
   }, []);
 
   return (
-    <Router>
-      <ScrollToTop />
+    <div
+      style={{
+        backgroundColor: "#07111F",
+        fontFamily: isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif",
+        color: "#F8FAFC",
+        overflowX: "hidden",
+      }}
+    >
+      {/* Scroll Progress Bar */}
       <div
+        className="fixed top-0 left-0 z-[200] h-[2px] transition-all duration-100"
         style={{
-          backgroundColor: "#07111F",
-          fontFamily: "'Inter', sans-serif",
-          color: "#F8FAFC",
-          overflowX: "hidden",
+          width: `${scrollProgress}%`,
+          background: "linear-gradient(to right, #1E4DB7, #4FD1FF)",
+          left: isRtl ? "auto" : 0,
+          right: isRtl ? 0 : "auto",
         }}
-      >
-        {/* Scroll Progress Bar */}
-        <div
-          className="fixed top-0 left-0 z-[200] h-[2px] transition-all duration-100"
-          style={{
-            width: `${scrollProgress}%`,
-            background: "linear-gradient(to right, #1E4DB7, #4FD1FF)",
-          }}
-        />
+      />
 
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/experience" element={<ExperiencePage />} />
-          <Route path="/skills" element={<SkillsPage />} />
-          <Route path="/achievements" element={<AchievementsPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/experience" element={<ExperiencePage />} />
+        <Route path="/skills" element={<SkillsPage />} />
+        <Route path="/achievements" element={<AchievementsPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+      </Routes>
+      <Footer />
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <LanguageProvider>
+      <Router>
+        <ScrollToTop />
+        <MainContent />
+      </Router>
+    </LanguageProvider>
   );
 }

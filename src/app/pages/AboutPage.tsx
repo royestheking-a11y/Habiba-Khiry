@@ -1,8 +1,11 @@
 import { About } from "../components/About";
 import { Philosophy } from "../components/Philosophy";
 import { motion } from "motion/react";
+import { useLanguage } from "../context/LanguageContext";
 
 export function AboutPage() {
+  const { t, isRtl } = useLanguage();
+
   return (
     <div style={{ paddingTop: "80px", minHeight: "100vh" }}>
       {/* Page Header */}
@@ -33,30 +36,30 @@ export function AboutPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif",
               fontSize: "0.8125rem",
               fontWeight: 600,
-              letterSpacing: "0.12em",
+              letterSpacing: isRtl ? "0" : "0.12em",
               color: "#4FD1FF",
               textTransform: "uppercase",
               marginBottom: "0.75rem",
             }}
           >
-            SME Trainer & Corporate Communication Expert
+            {isRtl ? "مدرب خبراء (SME) وأخصائية تواصل مؤسسي" : "SME Trainer & Corporate Communication Expert"}
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             style={{
-              fontFamily: "'Sora', sans-serif",
+              fontFamily: isRtl ? "'Cairo', sans-serif" : "'Sora', sans-serif",
               fontWeight: 800,
               fontSize: "clamp(2rem, 4vw, 3rem)",
               color: "#F8FAFC",
-              letterSpacing: "-0.03em",
+              letterSpacing: isRtl ? "0" : "-0.03em",
             }}
           >
-            My Journey & Background
+            {isRtl ? "مسيرتي المهنية وخلفيتي الأكاديمية" : "My Journey & Background"}
           </motion.h1>
           <motion.div
             initial={{ opacity: 0, scaleX: 0 }}

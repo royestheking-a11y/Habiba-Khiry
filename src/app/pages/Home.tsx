@@ -4,33 +4,36 @@ import { Philosophy } from "../components/Philosophy";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import { ArrowRight, User, Award, Brain, Mail, Briefcase } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 export function Home() {
+  const { t, isRtl } = useLanguage();
+
   const teaserCards = [
     {
-      title: "About Me",
-      desc: "Discover my professional journey from a high-priority escalations specialist at Noon to a Trainer Specialist at Etisalat.",
+      title: t("home.teaser.about.title"),
+      desc: t("home.teaser.about.desc"),
       link: "/about",
       icon: User,
       color: "#4FD1FF",
     },
     {
-      title: "Work Experience",
-      desc: "Explore my career timeline as a Trainer, SME Specialist, and Customer Experience Advisor.",
+      title: t("home.teaser.exp.title"),
+      desc: t("home.teaser.exp.desc"),
       link: "/experience",
       icon: Briefcase,
       color: "#1E4DB7",
     },
     {
-      title: "Skills & Core Competencies",
-      desc: "Check out my training methodologies, customer satisfaction coaching, and language capabilities.",
+      title: t("home.teaser.skills.title"),
+      desc: t("home.teaser.skills.desc"),
       link: "/skills",
       icon: Brain,
       color: "#4FD1FF",
     },
     {
-      title: "Achievements & Awards",
-      desc: "See a list of my Top Achiever awards, corporate recognition, and key certifications.",
+      title: t("home.teaser.ach.title"),
+      desc: t("home.teaser.ach.desc"),
       link: "/achievements",
       icon: Award,
       color: "#1E4DB7",
@@ -52,23 +55,40 @@ export function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
               style={{
-                fontFamily: "'Sora', sans-serif",
+                fontFamily: isRtl ? "'Cairo', sans-serif" : "'Sora', sans-serif",
                 fontWeight: 800,
                 fontSize: "clamp(2rem, 3.5vw, 2.75rem)",
                 color: "#F8FAFC",
-                letterSpacing: "-0.02em",
+                letterSpacing: isRtl ? "0" : "-0.02em",
               }}
             >
-              Explore My{" "}
-              <span
-                style={{
-                  background: "linear-gradient(90deg, #4FD1FF, #1E4DB7)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                Specialized Pages
-              </span>
+              {isRtl ? (
+                <>
+                  {t("home.explore.prefix")}{" "}
+                  <span
+                    style={{
+                      background: "linear-gradient(90deg, #4FD1FF, #1E4DB7)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                    }}
+                  >
+                    {t("home.explore.title")}
+                  </span>
+                </>
+              ) : (
+                <>
+                  {t("home.explore.prefix")}{" "}
+                  <span
+                    style={{
+                      background: "linear-gradient(90deg, #4FD1FF, #1E4DB7)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                    }}
+                  >
+                    {t("home.explore.title")}
+                  </span>
+                </>
+              )}
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -76,7 +96,7 @@ export function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
               style={{
-                fontFamily: "'Inter', sans-serif",
+                fontFamily: isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif",
                 fontSize: "1rem",
                 color: "#94A3B8",
                 marginTop: "1rem",
@@ -84,7 +104,7 @@ export function Home() {
                 margin: "1rem auto 0",
               }}
             >
-              Dive deeper into each aspect of my corporate background, professional training credentials, and hands-on communication expertise.
+              {t("home.explore.desc")}
             </motion.p>
           </div>
 
@@ -104,17 +124,20 @@ export function Home() {
                   backdropFilter: "blur(12px)",
                 }}
               >
-                <div className="flex items-start gap-5">
+                <div 
+                  className="flex items-start gap-5"
+                  style={{ flexDirection: isRtl ? "row-reverse" : "row" }}
+                >
                   <div
                     className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-110"
                     style={{ background: "rgba(30, 77, 183, 0.15)" }}
                   >
                     <card.icon size={22} color={card.color} />
                   </div>
-                  <div>
+                  <div style={{ textAlign: isRtl ? "right" : "left", width: "100%" }}>
                     <h3
                       style={{
-                        fontFamily: "'Sora', sans-serif",
+                        fontFamily: isRtl ? "'Cairo', sans-serif" : "'Sora', sans-serif",
                         fontWeight: 700,
                         fontSize: "1.25rem",
                         color: "#F8FAFC",
@@ -125,7 +148,7 @@ export function Home() {
                     </h3>
                     <p
                       style={{
-                        fontFamily: "'Inter', sans-serif",
+                        fontFamily: isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif",
                         fontSize: "0.9375rem",
                         color: "#94A3B8",
                         lineHeight: 1.6,
@@ -138,15 +161,23 @@ export function Home() {
                       to={card.link}
                       className="inline-flex items-center gap-2"
                       style={{
-                        fontFamily: "'Inter', sans-serif",
+                        fontFamily: isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif",
                         fontWeight: 600,
                         fontSize: "0.875rem",
                         color: "#4FD1FF",
                         textDecoration: "none",
+                        flexDirection: isRtl ? "row-reverse" : "row",
                       }}
                     >
-                      Learn more
-                      <ArrowRight size={14} className="transition-transform duration-200 group-hover:translate-x-1" />
+                      <span>{t("home.explore.more")}</span>
+                      <ArrowRight 
+                        size={14} 
+                        className={`transition-transform duration-200 ${
+                          isRtl 
+                            ? "group-hover:-translate-x-1 rotate-180" 
+                            : "group-hover:translate-x-1"
+                        }`} 
+                      />
                     </Link>
                   </div>
                 </div>
@@ -165,7 +196,7 @@ export function Home() {
               to="/contact"
               className="inline-flex items-center gap-3 px-8 py-4 rounded-xl transition-all duration-200"
               style={{
-                fontFamily: "'Inter', sans-serif",
+                fontFamily: isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif",
                 fontWeight: 600,
                 fontSize: "1rem",
                 background: "linear-gradient(135deg, #1E4DB7, #4FD1FF22)",
@@ -173,10 +204,11 @@ export function Home() {
                 color: "#4FD1FF",
                 textDecoration: "none",
                 boxShadow: "0 4px 20px rgba(30, 77, 183, 0.15)",
+                flexDirection: isRtl ? "row-reverse" : "row",
               }}
             >
               <Mail size={16} />
-              Let's Discuss Opportunities
+              {t("home.explore.btn")}
             </Link>
           </motion.div>
         </div>

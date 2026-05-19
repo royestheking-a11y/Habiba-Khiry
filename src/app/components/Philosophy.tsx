@@ -1,25 +1,31 @@
 import { motion } from "motion/react";
 import { Quote } from "lucide-react";
-
-const principles = [
-  {
-    number: "01",
-    title: "Listen First",
-    desc: "Every great customer interaction begins with truly hearing what the person needs — not just what they say.",
-  },
-  {
-    number: "02",
-    title: "Empower, Don't Script",
-    desc: "Trained advisors who understand principles outperform those who follow scripts. Real empowerment creates real results.",
-  },
-  {
-    number: "03",
-    title: "Excellence is Repeatable",
-    desc: "Top performance isn't luck — it's the result of deliberate practice, strong habits, and continuous reflection.",
-  },
-];
+import { useLanguage } from "../context/LanguageContext";
 
 export function Philosophy() {
+  const { language, t, isRtl } = useLanguage();
+
+  const principles = [
+    {
+      number: "٠١",
+      numberEn: "01",
+      title: t("phil.p1.title"),
+      desc: t("phil.p1.desc"),
+    },
+    {
+      number: "٠٢",
+      numberEn: "02",
+      title: t("phil.p2.title"),
+      desc: t("phil.p2.desc"),
+    },
+    {
+      number: "٠٣",
+      numberEn: "03",
+      title: t("phil.p3.title"),
+      desc: t("phil.p3.desc"),
+    },
+  ];
+
   return (
     <section
       id="philosophy"
@@ -68,17 +74,17 @@ export function Philosophy() {
 
           <blockquote
             style={{
-              fontFamily: "'Sora', sans-serif",
+              fontFamily: isRtl ? "'Cairo', sans-serif" : "'Sora', sans-serif",
               fontWeight: 700,
               fontSize: "clamp(1.5rem, 3.5vw, 2.25rem)",
-              lineHeight: 1.3,
-              letterSpacing: "-0.02em",
+              lineHeight: isRtl ? 1.35 : 1.3,
+              letterSpacing: isRtl ? "0" : "-0.02em",
               color: "#F8FAFC",
               maxWidth: "720px",
               margin: "0 auto",
             }}
           >
-            "Great customer experience starts with{" "}
+            "{t("phil.quote.pre")}
             <span
               style={{
                 background: "linear-gradient(90deg, #4FD1FF, #1E4DB7)",
@@ -86,25 +92,28 @@ export function Philosophy() {
                 WebkitTextFillColor: "transparent",
               }}
             >
-              empowered communication
+              {t("phil.quote.highlight")}
             </span>
-            ."
+            {t("phil.quote.post")}"
           </blockquote>
 
-          <div className="mt-6 flex items-center justify-center gap-3">
+          <div 
+            className="mt-6 flex items-center justify-center gap-3"
+            style={{ flexDirection: isRtl ? "row-reverse" : "row" }}
+          >
             <div
               className="w-8 h-px"
               style={{ background: "rgba(79, 209, 255, 0.3)" }}
             />
             <p
               style={{
-                fontFamily: "'Inter', sans-serif",
+                fontFamily: isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif",
                 fontSize: "0.875rem",
-                fontWeight: 500,
+                fontWeight: 600,
                 color: "#94A3B8",
               }}
             >
-              Habiba Khiry El Najar
+              {language === "ar" ? "حبيبة خيري النجار" : "Habiba Khiry El Najar"}
             </p>
             <div
               className="w-8 h-px"
@@ -114,7 +123,10 @@ export function Philosophy() {
         </motion.div>
 
         {/* Training principles */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div 
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          style={{ direction: isRtl ? "rtl" : "ltr" }}
+        >
           {principles.map((p, i) => (
             <motion.div
               key={i}
@@ -122,28 +134,30 @@ export function Philosophy() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="p-6 rounded-2xl"
+              className="p-6 rounded-2xl animate-glow-hover"
               style={{
                 background: "rgba(15, 23, 42, 0.4)",
                 border: "1px solid rgba(79, 209, 255, 0.07)",
+                textAlign: isRtl ? "right" : "left",
               }}
             >
               <span
                 style={{
-                  fontFamily: "'Sora', sans-serif",
+                  fontFamily: isRtl ? "'Cairo', sans-serif" : "'Sora', sans-serif",
                   fontWeight: 800,
                   fontSize: "2.5rem",
                   lineHeight: 1,
                   color: "rgba(79, 209, 255, 0.12)",
                   display: "block",
                   marginBottom: "1rem",
+                  textAlign: isRtl ? "right" : "left",
                 }}
               >
-                {p.number}
+                {isRtl ? p.number : p.numberEn}
               </span>
               <h3
                 style={{
-                  fontFamily: "'Sora', sans-serif",
+                  fontFamily: isRtl ? "'Cairo', sans-serif" : "'Sora', sans-serif",
                   fontWeight: 700,
                   fontSize: "1rem",
                   color: "#F8FAFC",
@@ -154,7 +168,7 @@ export function Philosophy() {
               </h3>
               <p
                 style={{
-                  fontFamily: "'Inter', sans-serif",
+                  fontFamily: isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif",
                   fontSize: "0.875rem",
                   color: "#94A3B8",
                   lineHeight: 1.7,

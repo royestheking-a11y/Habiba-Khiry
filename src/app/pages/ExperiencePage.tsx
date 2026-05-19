@@ -1,8 +1,11 @@
 import { Experience } from "../components/Experience";
 import { motion } from "motion/react";
-import { Award, Briefcase, FileText } from "lucide-react";
+import { FileText } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 export function ExperiencePage() {
+  const { t, isRtl } = useLanguage();
+
   return (
     <div style={{ paddingTop: "80px", minHeight: "100vh" }}>
       {/* Page Header */}
@@ -32,30 +35,30 @@ export function ExperiencePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif",
               fontSize: "0.8125rem",
               fontWeight: 600,
-              letterSpacing: "0.12em",
+              letterSpacing: isRtl ? "0" : "0.12em",
               color: "#4FD1FF",
               textTransform: "uppercase",
               marginBottom: "0.75rem",
             }}
           >
-            My Timeline
+            {t("exp.header.tag")}
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             style={{
-              fontFamily: "'Sora', sans-serif",
+              fontFamily: isRtl ? "'Cairo', sans-serif" : "'Sora', sans-serif",
               fontWeight: 800,
               fontSize: "clamp(2rem, 4vw, 3rem)",
               color: "#F8FAFC",
-              letterSpacing: "-0.03em",
+              letterSpacing: isRtl ? "0" : "-0.03em",
             }}
           >
-            Work Experience & Milestones
+            {t("exp.header.title")}
           </motion.h1>
           <motion.div
             initial={{ opacity: 0, scaleX: 0 }}
@@ -84,18 +87,18 @@ export function ExperiencePage() {
           >
             <h3
               style={{
-                fontFamily: "'Sora', sans-serif",
+                fontFamily: isRtl ? "'Cairo', sans-serif" : "'Sora', sans-serif",
                 fontWeight: 700,
                 fontSize: "1.5rem",
                 color: "#F8FAFC",
                 marginBottom: "1rem",
               }}
             >
-              Curious about the full details?
+              {t("exp.footer.title")}
             </h3>
             <p
               style={{
-                fontFamily: "'Inter', sans-serif",
+                fontFamily: isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif",
                 fontSize: "0.9375rem",
                 color: "#94A3B8",
                 lineHeight: 1.7,
@@ -104,24 +107,25 @@ export function ExperiencePage() {
                 margin: "0 auto 2rem",
               }}
             >
-              You can download my full resume for an offline copy of my roles, university credentials, and contact info.
+              {t("exp.footer.desc")}
             </p>
             <a
               href="/resume.pdf"
               download="Habiba_Khiry_Resume.pdf"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl transition-all duration-200"
               style={{
-                fontFamily: "'Inter', sans-serif",
+                fontFamily: isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif",
                 fontWeight: 600,
                 fontSize: "0.9375rem",
                 background: "linear-gradient(135deg, #1E4DB7, #4FD1FF22)",
                 border: "1px solid rgba(79, 209, 255, 0.25)",
                 color: "#4FD1FF",
                 textDecoration: "none",
+                flexDirection: isRtl ? "row-reverse" : "row",
               }}
             >
               <FileText size={16} />
-              Download My Resume
+              {t("exp.footer.btn")}
             </a>
           </div>
         </div>

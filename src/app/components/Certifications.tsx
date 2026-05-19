@@ -1,64 +1,67 @@
 import { motion } from "motion/react";
 import { ExternalLink, BookOpen } from "lucide-react";
-
-const certs = [
-  {
-    title: "Fundamentals of Digital Marketing",
-    issuer: "Google Maharat",
-    date: "December 2021",
-    color: "#4FD1FF",
-    bg: "rgba(79, 209, 255, 0.06)",
-    border: "rgba(79, 209, 255, 0.15)",
-    initial: "G",
-  },
-  {
-    title: "Financial Inclusion Training",
-    issuer: "Banque Misr",
-    date: "October 2021",
-    color: "#1E4DB7",
-    bg: "rgba(30, 77, 183, 0.08)",
-    border: "rgba(30, 77, 183, 0.2)",
-    initial: "BM",
-  },
-  {
-    title: "Financial Inclusion Summer Program",
-    issuer: "CIB – Commercial International Bank",
-    date: "Summer 2021",
-    color: "#94A3B8",
-    bg: "rgba(148, 163, 184, 0.06)",
-    border: "rgba(148, 163, 184, 0.15)",
-    initial: "CIB",
-  },
-  {
-    title: "Business English (Pre-Intermediate)",
-    issuer: "American University in Cairo (AUC)",
-    date: "February 2022",
-    color: "#4FD1FF",
-    bg: "rgba(79, 209, 255, 0.06)",
-    border: "rgba(79, 209, 255, 0.12)",
-    initial: "AUC",
-  },
-  {
-    title: "English for Career Development",
-    issuer: "OPEN MOOCs",
-    date: "September 2021",
-    color: "#94A3B8",
-    bg: "rgba(148, 163, 184, 0.06)",
-    border: "rgba(148, 163, 184, 0.12)",
-    initial: "EM",
-  },
-  {
-    title: "Advanced Excel Course",
-    issuer: "LTC Solution",
-    date: "2022",
-    color: "#1E4DB7",
-    bg: "rgba(30, 77, 183, 0.08)",
-    border: "rgba(30, 77, 183, 0.18)",
-    initial: "XL",
-  },
-];
+import { useLanguage } from "../context/LanguageContext";
 
 export function Certifications() {
+  const { language, isRtl } = useLanguage();
+
+  const certs = [
+    {
+      title: language === "ar" ? "أساسيات التسويق الرقمي" : "Fundamentals of Digital Marketing",
+      issuer: "Google Maharat 🌐",
+      date: language === "ar" ? "ديسمبر ٢٠٢١" : "December 2021",
+      color: "#4FD1FF",
+      bg: "rgba(79, 209, 255, 0.06)",
+      border: "rgba(79, 209, 255, 0.15)",
+      initial: language === "ar" ? "جوجل" : "G",
+    },
+    {
+      title: language === "ar" ? "التدريب الميداني والشمول المالي" : "Financial Inclusion Training",
+      issuer: "Banque Misr 🏦",
+      date: language === "ar" ? "أكتوبر ٢٠٢١" : "October 2021",
+      color: "#1E4DB7",
+      bg: "rgba(30, 77, 183, 0.08)",
+      border: "rgba(30, 77, 183, 0.2)",
+      initial: language === "ar" ? "مصر" : "BM",
+    },
+    {
+      title: language === "ar" ? "البرنامج التدريبي للشمول المالي" : "Financial Inclusion Summer Program",
+      issuer: "CIB – Commercial International Bank 🏦",
+      date: language === "ar" ? "صيف ٢٠٢١" : "Summer 2021",
+      color: "#94A3B8",
+      bg: "rgba(148, 163, 184, 0.06)",
+      border: "rgba(148, 163, 184, 0.15)",
+      initial: "CIB",
+    },
+    {
+      title: language === "ar" ? "إنجليزية الأعمال (دون المتوسط)" : "Business English (Pre-Intermediate)",
+      issuer: "American University in Cairo (AUC) 🇺🇸",
+      date: language === "ar" ? "فبراير ٢٠٢٢" : "February 2022",
+      color: "#4FD1FF",
+      bg: "rgba(79, 209, 255, 0.06)",
+      border: "rgba(79, 209, 255, 0.12)",
+      initial: "AUC",
+    },
+    {
+      title: language === "ar" ? "اللغة الإنجليزية للتطوير المهني" : "English for Career Development",
+      issuer: "OPEN MOOCs 🌐",
+      date: language === "ar" ? "سبتمبر ٢٠٢١" : "September 2021",
+      color: "#94A3B8",
+      bg: "rgba(148, 163, 184, 0.06)",
+      border: "rgba(148, 163, 184, 0.12)",
+      initial: "EM",
+    },
+    {
+      title: language === "ar" ? "دورة مايكروسوفت إكسل المتقدم" : "Advanced Excel Course",
+      issuer: "LTC Solution 📈",
+      date: language === "ar" ? "عام ٢٠٢٢" : "2022",
+      color: "#1E4DB7",
+      bg: "rgba(30, 77, 183, 0.08)",
+      border: "rgba(30, 77, 183, 0.18)",
+      initial: "XL",
+    },
+  ];
+
   return (
     <section
       id="certifications"
@@ -84,32 +87,32 @@ export function Certifications() {
         >
           <p
             style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif",
               fontSize: "0.8125rem",
               fontWeight: 600,
-              letterSpacing: "0.12em",
+              letterSpacing: isRtl ? "0" : "0.12em",
               color: "#4FD1FF",
               textTransform: "uppercase",
               marginBottom: "1rem",
             }}
           >
-            Credentials
+            {language === "ar" ? "الاعتمادات والشهادات" : "Credentials"}
           </p>
           <h2
             style={{
-              fontFamily: "'Sora', sans-serif",
+              fontFamily: isRtl ? "'Cairo', sans-serif" : "'Sora', sans-serif",
               fontWeight: 800,
               fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
-              lineHeight: 1.15,
-              letterSpacing: "-0.03em",
+              lineHeight: isRtl ? 1.3 : 1.15,
+              letterSpacing: isRtl ? "0" : "-0.03em",
               color: "#F8FAFC",
             }}
           >
-            Certifications & Training
+            {language === "ar" ? "الشهادات والبرامج التدريبية" : "Certifications & Training"}
           </h2>
           <p
             style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif",
               fontSize: "1rem",
               color: "#94A3B8",
               marginTop: "1rem",
@@ -118,12 +121,16 @@ export function Certifications() {
               lineHeight: 1.7,
             }}
           >
-            Continuous learning across digital marketing, finance, language, and
-            business communication.
+            {language === "ar" 
+              ? "التعلم والتطوير المستمر في مجالات التسويق الرقمي، العلوم المالية والمصرفية، اللغات وتواصل الأعمال المتقدم." 
+              : "Continuous learning across digital marketing, finance, language, and business communication."}
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div 
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+          style={{ direction: isRtl ? "rtl" : "ltr" }}
+        >
           {certs.map((cert, i) => (
             <motion.div
               key={i}
@@ -131,10 +138,11 @@ export function Certifications() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="p-6 rounded-2xl flex flex-col gap-4 transition-all duration-300 cursor-default group"
+              className="p-6 rounded-2xl flex flex-col gap-4 transition-all duration-300 cursor-default group animate-glow-hover"
               style={{
                 background: cert.bg,
                 border: `1px solid ${cert.border}`,
+                textAlign: isRtl ? "right" : "left",
               }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
@@ -145,7 +153,10 @@ export function Certifications() {
                 (e.currentTarget as HTMLElement).style.boxShadow = "none";
               }}
             >
-              <div className="flex items-center justify-between">
+              <div 
+                className="flex items-center justify-between"
+                style={{ flexDirection: isRtl ? "row-reverse" : "row" }}
+              >
                 <div
                   className="w-12 h-12 rounded-xl flex items-center justify-center"
                   style={{
@@ -155,7 +166,7 @@ export function Certifications() {
                 >
                   <span
                     style={{
-                      fontFamily: "'Sora', sans-serif",
+                      fontFamily: isRtl ? "'Cairo', sans-serif" : "'Sora', sans-serif",
                       fontWeight: 800,
                       fontSize: cert.initial.length > 2 ? "0.625rem" : "0.75rem",
                       color: cert.color,
@@ -171,7 +182,7 @@ export function Certifications() {
               <div>
                 <h3
                   style={{
-                    fontFamily: "'Sora', sans-serif",
+                    fontFamily: isRtl ? "'Cairo', sans-serif" : "'Sora', sans-serif",
                     fontWeight: 700,
                     fontSize: "0.9375rem",
                     color: "#F8FAFC",
@@ -183,7 +194,7 @@ export function Certifications() {
                 </h3>
                 <p
                   style={{
-                    fontFamily: "'Inter', sans-serif",
+                    fontFamily: isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif",
                     fontSize: "0.8125rem",
                     fontWeight: 500,
                     color: cert.color,
@@ -194,22 +205,25 @@ export function Certifications() {
                 </p>
               </div>
 
-              <div className="flex items-center justify-between mt-auto">
+              <div 
+                className="flex items-center justify-between mt-auto"
+                style={{ flexDirection: isRtl ? "row-reverse" : "row" }}
+              >
                 <span
                   className="px-2.5 py-1 rounded-lg"
                   style={{
-                    fontFamily: "'Inter', sans-serif",
+                    fontFamily: isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif",
                     fontSize: "0.75rem",
                     color: "#94A3B8",
                     background: "rgba(148, 163, 184, 0.08)",
                   }}
                 >
-                  Issued {cert.date}
+                  {language === "ar" ? `صدر في ${cert.date}` : `Issued ${cert.date}`}
                 </span>
                 <button
                   className="flex items-center gap-1.5 transition-all duration-200"
                   style={{
-                    fontFamily: "'Inter', sans-serif",
+                    fontFamily: isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif",
                     fontSize: "0.75rem",
                     fontWeight: 500,
                     color: cert.color,
@@ -217,6 +231,7 @@ export function Certifications() {
                     background: "none",
                     border: "none",
                     cursor: "pointer",
+                    flexDirection: isRtl ? "row-reverse" : "row",
                   }}
                   onMouseEnter={(e) => {
                     (e.currentTarget as HTMLElement).style.opacity = "1";
@@ -225,8 +240,8 @@ export function Certifications() {
                     (e.currentTarget as HTMLElement).style.opacity = "0.7";
                   }}
                 >
-                  Verify
-                  <ExternalLink size={11} />
+                  {language === "ar" ? "التحقق" : "Verify"}
+                  <ExternalLink size={11} className={isRtl ? "rotate-180" : ""} />
                 </button>
               </div>
             </motion.div>

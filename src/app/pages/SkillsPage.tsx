@@ -1,8 +1,11 @@
 import { Skills } from "../components/Skills";
 import { TrustBar } from "../components/TrustBar";
 import { motion } from "motion/react";
+import { useLanguage } from "../context/LanguageContext";
 
 export function SkillsPage() {
+  const { language, isRtl } = useLanguage();
+
   return (
     <div style={{ paddingTop: "80px", minHeight: "100vh" }}>
       {/* Page Header */}
@@ -32,30 +35,30 @@ export function SkillsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif",
               fontSize: "0.8125rem",
               fontWeight: 600,
-              letterSpacing: "0.12em",
+              letterSpacing: isRtl ? "0" : "0.12em",
               color: "#4FD1FF",
               textTransform: "uppercase",
               marginBottom: "0.75rem",
             }}
           >
-            Core Competencies
+            {language === "ar" ? "الكفاءات والخبرات" : "Core Competencies"}
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             style={{
-              fontFamily: "'Sora', sans-serif",
+              fontFamily: isRtl ? "'Cairo', sans-serif" : "'Sora', sans-serif",
               fontWeight: 800,
               fontSize: "clamp(2rem, 4vw, 3rem)",
               color: "#F8FAFC",
-              letterSpacing: "-0.03em",
+              letterSpacing: isRtl ? "0" : "-0.03em",
             }}
           >
-            Skills & Methodologies
+            {language === "ar" ? "المهارات والمنهجيات المعتمدة" : "Skills & Methodologies"}
           </motion.h1>
           <motion.div
             initial={{ opacity: 0, scaleX: 0 }}

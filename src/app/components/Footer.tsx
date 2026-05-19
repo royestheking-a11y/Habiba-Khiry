@@ -1,16 +1,19 @@
 import { Linkedin, Mail, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
-
-const navLinks = [
-  { label: "Home", to: "/" },
-  { label: "About", to: "/about" },
-  { label: "Experience", to: "/experience" },
-  { label: "Skills", to: "/skills" },
-  { label: "Achievements", to: "/achievements" },
-  { label: "Contact", to: "/contact" },
-];
+import { useLanguage } from "../context/LanguageContext";
 
 export function Footer() {
+  const { language, t, isRtl } = useLanguage();
+
+  const navLinks = [
+    { label: t("nav.home"), to: "/" },
+    { label: t("nav.about"), to: "/about" },
+    { label: t("nav.experience"), to: "/experience" },
+    { label: t("nav.skills"), to: "/skills" },
+    { label: t("nav.achievements"), to: "/achievements" },
+    { label: t("nav.contact"), to: "/contact" },
+  ];
+
   return (
     <footer
       className="relative"
@@ -28,22 +31,33 @@ export function Footer() {
       />
 
       <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+        <div 
+          className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12"
+          style={{ direction: isRtl ? "rtl" : "ltr" }}
+        >
           {/* Brand */}
-          <div>
-            <Link to="/" className="flex items-center gap-1 mb-4" style={{ textDecoration: "none" }}>
+          <div style={{ textAlign: isRtl ? "right" : "left" }}>
+            <Link 
+              to="/" 
+              className="flex items-center gap-1 mb-4" 
+              style={{ 
+                textDecoration: "none",
+                flexDirection: isRtl ? "row-reverse" : "row",
+                justifyContent: isRtl ? "flex-start" : "flex-start"
+              }}
+            >
               <span
                 style={{
-                  fontFamily: "'Sora', sans-serif",
+                  fontFamily: isRtl ? "'Cairo', sans-serif" : "'Sora', sans-serif",
                   fontWeight: 800,
                   fontSize: "1.25rem",
-                  letterSpacing: "-0.03em",
+                  letterSpacing: isRtl ? "0" : "-0.03em",
                   background: "linear-gradient(90deg, #F8FAFC 60%, #4FD1FF 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                 }}
               >
-                Habiba Khiry
+                {language === "ar" ? "حبيبة خيري" : "Habiba Khiry"}
               </span>
               <span
                 style={{
@@ -54,45 +68,46 @@ export function Footer() {
                   alignSelf: "flex-end",
                   marginBottom: "5px",
                   boxShadow: "0 0 8px #4FD1FF",
+                  marginLeft: isRtl ? "0" : "2px",
+                  marginRight: isRtl ? "2px" : "0",
                 }}
               />
             </Link>
             <p
               style={{
-                fontFamily: "'Inter', sans-serif",
+                fontFamily: isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif",
                 fontSize: "0.875rem",
                 color: "#94A3B8",
                 lineHeight: 1.7,
-                maxWidth: "240px",
+                maxWidth: "280px",
               }}
             >
-              SME Trainer & Corporate Communication Expert. Empowering teams through
-              exceptional communication and customer experience.
+              {t("footer.desc")}
             </p>
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div style={{ textAlign: isRtl ? "right" : "left" }}>
             <h4
               style={{
-                fontFamily: "'Sora', sans-serif",
+                fontFamily: isRtl ? "'Cairo', sans-serif" : "'Sora', sans-serif",
                 fontWeight: 600,
                 fontSize: "0.875rem",
                 color: "#F8FAFC",
                 marginBottom: "1.25rem",
-                letterSpacing: "0.04em",
+                letterSpacing: isRtl ? "0" : "0.04em",
               }}
             >
-              Quick Links
+              {t("footer.links.title")}
             </h4>
             <div className="flex flex-col gap-2.5">
               {navLinks.map((link) => (
                 <Link
                   key={link.label}
                   to={link.to}
-                  className="text-left transition-colors duration-200"
+                  className={`transition-colors duration-200 ${isRtl ? "text-right" : "text-left"}`}
                   style={{
-                    fontFamily: "'Inter', sans-serif",
+                    fontFamily: isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif",
                     fontSize: "0.875rem",
                     color: "#94A3B8",
                     textDecoration: "none",
@@ -110,20 +125,19 @@ export function Footer() {
             </div>
           </div>
 
-
           {/* Contact & Social */}
-          <div>
+          <div style={{ textAlign: isRtl ? "right" : "left" }}>
             <h4
               style={{
-                fontFamily: "'Sora', sans-serif",
+                fontFamily: isRtl ? "'Cairo', sans-serif" : "'Sora', sans-serif",
                 fontWeight: 600,
                 fontSize: "0.875rem",
                 color: "#F8FAFC",
                 marginBottom: "1.25rem",
-                letterSpacing: "0.04em",
+                letterSpacing: isRtl ? "0" : "0.04em",
               }}
             >
-              Contact
+              {language === "ar" ? "بيانات الاتصال" : "Contact"}
             </h4>
             <div className="flex flex-col gap-3 mb-6">
               {[
@@ -134,12 +148,15 @@ export function Footer() {
                   key={i}
                   href={item.href}
                   className="flex items-center gap-2.5 group"
-                  style={{ textDecoration: "none" }}
+                  style={{ 
+                    textDecoration: "none",
+                    flexDirection: isRtl ? "row-reverse" : "row"
+                  }}
                 >
                   <item.icon size={14} color="#4FD1FF" />
                   <span
                     style={{
-                      fontFamily: "'Inter', sans-serif",
+                      fontFamily: isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif",
                       fontSize: "0.875rem",
                       color: "#94A3B8",
                       transition: "color 0.2s",
@@ -164,13 +181,14 @@ export function Footer() {
               rel="noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-200"
               style={{
-                fontFamily: "'Inter', sans-serif",
+                fontFamily: isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif",
                 fontSize: "0.8125rem",
                 fontWeight: 500,
                 color: "#4FD1FF",
                 background: "rgba(79, 209, 255, 0.06)",
                 border: "1px solid rgba(79, 209, 255, 0.15)",
                 textDecoration: "none",
+                flexDirection: isRtl ? "row-reverse" : "row",
               }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLElement).style.background = "rgba(79, 209, 255, 0.12)";
@@ -182,7 +200,7 @@ export function Footer() {
               }}
             >
               <Linkedin size={14} />
-              Connect on LinkedIn
+              {t("footer.social.btn")}
             </a>
           </div>
         </div>
@@ -190,25 +208,33 @@ export function Footer() {
         {/* Bottom bar */}
         <div
           className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
-          style={{ borderTop: "1px solid rgba(79, 209, 255, 0.06)" }}
+          style={{ 
+            borderTop: "1px solid rgba(79, 209, 255, 0.06)",
+            flexDirection: isRtl ? "row-reverse" : "row"
+          }}
         >
           <p
             style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif",
               fontSize: "0.8125rem",
               color: "#94A3B8",
+              textAlign: isRtl ? "right" : "left",
             }}
           >
-            © 2026 Habiba Khiry El Najar. All rights reserved.
+            {t("footer.copy")}
           </p>
           <p
             style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: isRtl ? "'Cairo', sans-serif" : "'Inter', sans-serif",
               fontSize: "0.8125rem",
               color: "#94A3B8",
+              display: "flex",
+              alignItems: "center",
+              gap: "4px",
+              flexDirection: isRtl ? "row-reverse" : "row",
             }}
           >
-            <span>Designed & Developed by </span>
+            <span>{t("footer.credit")}</span>
             <a
               href="https://www.linkedin.com/in/aurangzebsunny/"
               target="_blank"
@@ -216,7 +242,7 @@ export function Footer() {
               style={{
                 color: "#4FD1FF",
                 textDecoration: "none",
-                fontWeight: 500,
+                fontWeight: 600,
                 transition: "color 0.2s",
               }}
               onMouseEnter={(e) =>
@@ -226,7 +252,7 @@ export function Footer() {
                 ((e.target as HTMLElement).style.color = "#4FD1FF")
               }
             >
-              Aurangzeb Sunny
+              {language === "ar" ? "أورنجزيب سني" : "Aurangzeb Sunny"}
             </a>
           </p>
         </div>
