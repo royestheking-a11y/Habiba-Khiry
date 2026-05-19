@@ -2,6 +2,7 @@ import { Linkedin, Mail, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const navLinks = [
+  { label: "Home", to: "/" },
   { label: "About", to: "/about" },
   { label: "Experience", to: "/experience" },
   { label: "Skills", to: "/skills" },
